@@ -4,6 +4,7 @@ export const defaultValue = {
 	businesses: [],
 	pages: {},
 	modal: null,
+	error: null,
 };
 
 export const { Provider, Consumer } = React.createContext(defaultValue);

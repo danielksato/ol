@@ -3,6 +3,7 @@ import * as actions from 'context/actions';
 import { Provider, Consumer, defaultValue } from 'context';
 import Businesses from 'components/Businesses';
 import BusinessDetail from 'components/BusinessDetail';
+import ErrorModal from 'components/ErrorModal';
 import Modal from 'react-modal';
 
 Modal.setAppElement(document.getElementById('root'));
@@ -13,19 +14,23 @@ export default class App extends PureComponent {
 	getBoundActions = () => {
 		return Object.entries(actions).reduce((acc, [actionName, action]) => {
 			acc[actionName] = (...args) => {
-				action(...args)(this.state).then((newState) => {
-					this.setState(newState);
-				});
+				action(...args)(this.state).then(
+					(newState) => {
+						this.setState(newState);
+					},
+					() => this.setState({ error: true })
+				);
 			};
 			return acc;
 		}, {});
 	};
 
 	renderModal() {
-		const { modal } = this.state;
+		const { modal, error } = this.state;
 		return (
-			<Modal isOpen={!!modal} onRequestClose={this.getBoundActions().closeModal}>
+			<Modal isOpen={!!(modal || error)} onRequestClose={this.getBoundActions().closeModal}>
 				{modal && <BusinessDetail {...modal} />}
+				{error && <ErrorModal />}
 			</Modal>
 		);
 	}
