@@ -3,6 +3,8 @@ import { consume } from 'context';
 import InfiniteScroller from 'components/InfiniteScroller';
 import Business from 'components/Business';
 
+import styles from 'styles/Businesses.scss';
+
 export class Businesses extends PureComponent {
 	componentDidMount() {
 		this.props.getFirstPage();
@@ -25,7 +27,11 @@ export class Businesses extends PureComponent {
 	}
 
 	render() {
-		return <InfiniteScroller onScroll={this.onScroll}>{this.renderBusinesses()}</InfiniteScroller>;
+		return (
+			<div className={styles.businesses}>
+				<InfiniteScroller onScroll={this.onScroll}>{this.renderBusinesses()}</InfiniteScroller>
+			</div>
+		);
 	}
 }
 

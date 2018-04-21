@@ -6,6 +6,8 @@ import BusinessDetail from 'components/BusinessDetail';
 import ErrorModal from 'components/ErrorModal';
 import Modal from 'react-modal';
 
+import styles from 'styles/App.scss';
+
 Modal.setAppElement(document.getElementById('root'));
 
 export default class App extends PureComponent {
@@ -28,7 +30,11 @@ export default class App extends PureComponent {
 	renderModal() {
 		const { detailsModal, error } = this.state;
 		return (
-			<Modal isOpen={!!(detailsModal || error)} onRequestClose={this.getBoundActions().closeModal}>
+			<Modal
+				className={styles.modal}
+				isOpen={!!(detailsModal || error)}
+				onRequestClose={this.getBoundActions().closeModal}
+			>
 				{detailsModal && <BusinessDetail {...detailsModal} />}
 				{error && <ErrorModal />}
 			</Modal>
@@ -39,7 +45,7 @@ export default class App extends PureComponent {
 		return (
 			<Provider value={{ ...this.state, ...this.getBoundActions() }}>
 				{this.renderModal()}
-				<h2>Businesses</h2>
+				<h2 className={styles.header}>Businesses</h2>
 				<Businesses />
 			</Provider>
 		);

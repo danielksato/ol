@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import styles from 'styles/InfiniteScroller.scss';
 
 export default class InfiniteScroller extends PureComponent {
 	canScroll = true;
@@ -27,15 +28,7 @@ export default class InfiniteScroller extends PureComponent {
 
 	render() {
 		return (
-			<div
-				style={{
-					maxHeight: 800,
-					display: 'inline-flex',
-					flexDirection: 'column',
-					overflowY: 'scroll',
-				}}
-				ref={this.scrollerRef}
-			>
+			<div className={styles.scroller} ref={this.scrollerRef}>
 				{this.props.children}
 			</div>
 		);

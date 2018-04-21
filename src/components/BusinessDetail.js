@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
-import styles from '../styles/BusinessDetail.module.css';
+import styles from 'styles/BusinessDetail.scss';
+import formatPhoneNumber from 'util/FormatPhoneNumber';
 
 export default class BusinessDetails extends PureComponent {
 	renderAddress() {
@@ -15,7 +16,7 @@ export default class BusinessDetails extends PureComponent {
 		const { phone, website } = this.props;
 		return (
 			<div>
-				<p>{phone}</p>
+				<p>{formatPhoneNumber(phone)}</p>
 				<a href={website}>{website}</a>
 			</div>
 		);
