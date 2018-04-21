@@ -13,19 +13,17 @@ Modal.setAppElement(document.getElementById('root'));
 export default class App extends PureComponent {
 	state = defaultValue;
 
-	getBoundActions = () => {
-		return Object.entries(actions).reduce((acc, [actionName, action]) => {
-			acc[actionName] = (...args) => {
-				action(...args)(this.state).then(
-					(newState) => {
-						this.setState(newState);
-					},
-					() => this.setState({ error: true })
-				);
-			};
-			return acc;
-		}, {});
-	};
+	boundActions = Object.entries(actions).reduce((acc, [actionName, action]) => {
+		acc[actionName] = (...args) => {
+			action(...args)(this.state).then(
+				(newState) => {
+					this.setState(newState);
+				},
+				() => this.setState({ error: true })
+			);
+		};
+		return acc;
+	}, {});
 
 	renderModal() {
 		const { detailsModal, error } = this.state;
@@ -33,7 +31,7 @@ export default class App extends PureComponent {
 			<Modal
 				className={styles.modal}
 				isOpen={!!(detailsModal || error)}
-				onRequestClose={this.getBoundActions().closeModal}
+				onRequestClose={this.boundActions.closeModal}
 			>
 				{detailsModal && <BusinessDetail {...detailsModal} />}
 				{error && <ErrorModal />}
@@ -43,7 +41,7 @@ export default class App extends PureComponent {
 
 	render() {
 		return (
-			<Provider value={{ ...this.state, ...this.getBoundActions() }}>
+			<Provider value={{ ...this.state, ...this.boundActions }}>
 				{this.renderModal()}
 				<h2 className={styles.header}>Businesses</h2>
 				<Businesses />
