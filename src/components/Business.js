@@ -3,7 +3,7 @@ import { consume } from 'context';
 
 export class Business extends PureComponent {
 	onClick = (e) => {
-		this.props.openModal(this.props.id);
+		this.props.openDetailsModal(this.props.id);
 	};
 
 	render() {

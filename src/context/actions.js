@@ -12,10 +12,10 @@ export const incrementPage = (page) => async ({ businesses, ...restOfState }) =>
 
 export const getFirstPage = () => async () => getBusinesses();
 
-export const openModal = (businessId) => async (state) => {
+export const openDetailsModal = (businessId) => async (state) => {
 	return {
 		...state,
-		modal: await getBusinessDetail(businessId),
+		detailsModal: await getBusinessDetail(businessId),
 	};
 };
 

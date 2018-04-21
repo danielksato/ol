@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import * as actions from 'context/actions';
-import { Provider, Consumer, defaultValue } from 'context';
+import { Provider, defaultValue } from 'context';
 import Businesses from 'components/Businesses';
 import BusinessDetail from 'components/BusinessDetail';
 import ErrorModal from 'components/ErrorModal';
@@ -26,10 +26,10 @@ export default class App extends PureComponent {
 	};
 
 	renderModal() {
-		const { modal, error } = this.state;
+		const { detailsModal, error } = this.state;
 		return (
-			<Modal isOpen={!!(modal || error)} onRequestClose={this.getBoundActions().closeModal}>
-				{modal && <BusinessDetail {...modal} />}
+			<Modal isOpen={!!(detailsModal || error)} onRequestClose={this.getBoundActions().closeModal}>
+				{detailsModal && <BusinessDetail {...detailsModal} />}
 				{error && <ErrorModal />}
 			</Modal>
 		);

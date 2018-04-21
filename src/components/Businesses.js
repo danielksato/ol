@@ -4,17 +4,8 @@ import InfiniteScroller from 'components/InfiniteScroller';
 import Business from 'components/Business';
 
 export class Businesses extends PureComponent {
-	businessesRef = (el) => {
-		this.businesses = el;
-		this.listener = this.businesses.addEventListener('scroll', this.scrollListener);
-	};
-
 	componentDidMount() {
 		this.props.getFirstPage();
-	}
-
-	componentWillUnmount() {
-		this.business.removeEventListener(this.listener);
 	}
 
 	onScroll = () => {

@@ -1,19 +1,26 @@
 import React, { PureComponent } from 'react';
 
 export default class InfiniteScroller extends PureComponent {
+	canScroll = true;
+
 	scrollerRef = (el) => {
 		this.scroller = el;
-		this.listener = this.scroller.addEventListener('scroll', this.scrollListener);
+		this.scroller && this.scroller.addEventListener('scroll', this.scrollListener);
 	};
 
 	componentWillUnmount() {
-		this.scroller.removeEventListener(this.scrollListener);
+		this.scoller && this.scroller.removeEventListener(this.scrollListener);
+	}
+
+	componentDidUpdate() {
+		this.canScroll = true;
 	}
 
 	scrollListener = ({ currentTarget: { scrollHeight, scrollTop, clientHeight } }) => {
 		const { onScroll } = this.props;
 		const threshold = scrollHeight - clientHeight * 2 - scrollTop;
-		if (threshold <= 0) {
+		if (threshold <= 0 && this.canScroll) {
+			this.canScroll = false;
 			onScroll();
 		}
 	};

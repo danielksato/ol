@@ -3,7 +3,7 @@ import React from 'react';
 export const defaultValue = {
 	businesses: [],
 	pages: {},
-	modal: null,
+	detailsModal: null,
 	error: null,
 };
 
