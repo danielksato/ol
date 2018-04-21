@@ -62,6 +62,11 @@ const ExtractTextPluginCSSModules = new ExtractTextPlugin({
   ignoreOrder: true,
 })
 
+const ExtractTextPluginSCSSModules = new ExtractTextPlugin({
+  filename: cssModulesFilename,
+  ignoreOrder: true,
+})
+
 // This is the production configuration.
 // It compiles slowly and is focused on producing a fast and minimal bundle.
 // The development configuration is different and lives in a separate file.
@@ -226,6 +231,28 @@ module.exports = {
             // Note: this won't work without `ExtractTextPluginCSSModules` in `plugins`.
           },
           {
+            test: /\.scss$/,
+            include: paths.appSrc,
+            loader: ExtractTextPluginSCSSModules.extract(Object.assign({
+              fallback: 'style-loader',
+              use: [
+                {
+                  loader: "css-loader",
+                  options: {
+                    camelCase: true,
+                    importLoaders: 1,
+                    modules: true,
+                    minimize: true,
+                    sourceMap: shouldUseSourceMap,
+                    localIdentName: '[name]_[local]',
+                  }
+                }, {
+                    loader: "sass-loader" // compiles Sass to CSS
+                }
+              ]
+            }, extractTextPluginCSSModulesOptions))
+          },
+          {
             test: /\.css$/,
             exclude: /\.module\.css$/,
             loader: ExtractTextPluginCSS.extract(
@@ -349,6 +376,7 @@ module.exports = {
     // cssmodules and regular css
     ExtractTextPluginCSS,
     ExtractTextPluginCSSModules,
+    ExtractTextPluginSCSSModules,
     // Generate a manifest file which contains a mapping of all asset filenames
     // to their corresponding output file so that tools can pick it up without
     // having to parse `index.html`.

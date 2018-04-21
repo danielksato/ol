@@ -2,10 +2,13 @@
     background-color: white;
     border-radius: 5px;
     border: 1px solid black;
-    height: 25%;
-    margin: calc(75% / 2) auto;
+    height: fit-content;
+    margin: auto;
+    min-height: 25%;
     padding: 15px;
+    position: relative;
     text-align: center;
+    top: 37.5%;
     width: 50%;
 
     &:focus {
