@@ -1,10 +1,13 @@
 import React, { PureComponent } from 'react';
+import styles from '../styles/BusinessDetail.module.css';
 
 export default class BusinessDetails extends PureComponent {
 	renderAddress() {
 		const { address, address2, city, state, zip } = this.props;
 		return Object.entries({ address, address2, city, state, zip }).map(([key, val]) => (
-			<p key={`address-${key}`}>{val}</p>
+			<p className={styles.address} key={`address-${key}`}>
+				{val}
+			</p>
 		));
 	}
 
