@@ -1,3 +1,24 @@
+## Daniel Sato's OwnLocal Project
+
+- Single-page React app made with Create-React-App.
+- Used new Context API from React 16.3.
+- Used react-modal to handle modals for business details and errors.
+- Created a rudimentary infinite scroll instead of showing pagination links.
+- Tested using Jest - mostly integration tests.
+- Component tests using Enzyme.
+- Ejected from Create-React-App in order to use Sass modules.
+
+To run the project:
+
+1. Clone the repo.
+2. Install dependencies with `yarn`.
+3. Run the project locally with `yarn start`.
+4. Project is also deployed at [http://ownlocal-project.s3-website-us-east-1.amazonaws.com/](http://ownlocal-project.s3-website-us-east-1.amazonaws.com/).
+
+
+
+### Create-React-App boilerplate follows
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
