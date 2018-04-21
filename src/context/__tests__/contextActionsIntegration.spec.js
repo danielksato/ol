@@ -16,7 +16,7 @@ const pageOne = mockBusinessesResponsePageOne();
 const pageTwo = mockBusinessesResponsePageTwo();
 const business = mockBusinessResponse();
 
-describe('Context', () => {
+describe('Context and actions', () => {
 	beforeEach(() => {
 		Api.getBusinesses.mockImplementation(() => Promise.resolve(pageOne));
 	});
@@ -63,6 +63,18 @@ describe('Context', () => {
 			await nextTick();
 			expect(app.state.detailsModal).toBe(null);
 			expect(app.state.error).toBe(true);
+		});
+
+		it('should close a modal', async () => {
+			const app = renderIntoDocument(<App />);
+			await nextTick();
+			Api.getBusinessDetail.mockImplementation(() => Promise.reject());
+			app.getBoundActions().openDetailsModal(app.state.businesses[0].id);
+			await nextTick();
+			app.getBoundActions().closeModal();
+			await nextTick();
+			expect(app.state.detailsModal).toBe(null);
+			expect(app.state.error).toBe(null);
 		});
 	});
 });

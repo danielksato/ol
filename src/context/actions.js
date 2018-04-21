@@ -20,4 +20,4 @@ export const openDetailsModal = (businessId) => async (state) => {
 };
 
 export const closeModal = () => ({ modal, ...restOfState }) =>
-	Promise.resolve({ ...restOfState, modal: null, error: null });
+	Promise.resolve({ ...restOfState, detailsModal: null, error: null });
