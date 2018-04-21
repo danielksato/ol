@@ -10,10 +10,10 @@ export class Businesses extends PureComponent {
 
 	onScroll = () => {
 		const {
-			pages: { next, last },
+			pages: { next },
 			incrementPage,
 		} = this.props;
-		if (next && next !== last) {
+		if (next) {
 			incrementPage(next);
 		}
 	};
